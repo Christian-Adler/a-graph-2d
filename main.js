@@ -1,17 +1,72 @@
-import {clear, zeichneKoordinatenSystem} from "./modules/drawer.js";
+import {clear} from "./modules/drawer.js";
+import {updateState} from "./modules/state.js";
+import {zeichne} from "./modules/drawLines.js";
 
 const main = () => {
   const canvas = document.getElementById("drawArea");
   const ctx = canvas.getContext("2d");
+  let ctxData = {};
+  // Start listening to resize events and draw canvas.
+  initialize();
   
-  const WIDTH = 800;
-  const HEIGHT = 800;
+  function initialize() {
+    window.addEventListener('resize', resizeCanvas, false);
+    resizeCanvas();
+  }
   
-  const drawItem = { ctx, WIDTH, HEIGHT, center: { x: WIDTH / 2, y: HEIGHT / 2 } };
+  // Runs each time the DOM window resize event fires. Resets the canvas dimensions to match window,
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const WIDTH = window.innerWidth;
+    const HEIGHT = window.innerHeight;
+    
+    ctxData = { ctx, WIDTH, HEIGHT, center: { x: WIDTH / 2, y: HEIGHT / 2 } };
+    draw();
+  }
   
+  function update(progress) {
+    // Update the state of the world for the elapsed time since last render
+    updateState(progress, ctxData);
+  }
   
-  clear(drawItem);
-  zeichneKoordinatenSystem(drawItem);
+  function translateForPxLines() {
+    ctx.translate(0.5, 0.0); // https://stackoverflow.com/questions/13879322/drawing-a-1px-thick-line-in-canvas-creates-a-2px-thick-line
+  }
+  
+  function translateBackAfterPxLines() {
+    ctx.translate(-0.5, -0.0);
+  }
+  
+  function draw() {
+    clear(ctxData);
+    // drawBorder(ctxData);
+    
+    translateForPxLines();
+    {
+      // zeichneKoordinatenSystem(ctxData);
+      // drawLine(ctxData);
+      
+      zeichne(ctxData);
+    }
+    translateBackAfterPxLines();
+  }
+  
+  // https://www.sitepoint.com/quick-tip-game-loop-in-javascript/
+  function loop(timestamp) {
+    const progress = timestamp - lastRender
+    
+    update(progress)
+    draw()
+    
+    lastRender = timestamp
+    window.requestAnimationFrame(loop)
+  }
+  
+  let lastRender = 0;
+  if (1 > 0)
+    window.requestAnimationFrame(loop)
 };
 
 main();
