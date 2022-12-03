@@ -1,6 +1,7 @@
 import {clear} from "./modules/drawer.js";
 import {updateState} from "./modules/state.js";
 import {zeichne} from "./modules/drawLines.js";
+import {zeichneVar} from "./modules/drawLinesVar.js";
 
 const main = () => {
   const canvas = document.getElementById("drawArea");
@@ -48,7 +49,8 @@ const main = () => {
       // zeichneKoordinatenSystem(ctxData);
       // drawLine(ctxData);
       
-      zeichne(ctxData);
+      if (false) zeichne(ctxData);
+      zeichneVar(ctxData);
     }
     translateBackAfterPxLines();
   }

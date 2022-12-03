@@ -69,6 +69,42 @@ export const zeichne = ({ ctx /*, center, WIDTH, HEIGHT */ }) => {
   
   
   // Würfel
+  // =========
+  
+  // Flächen
+  ctx.beginPath();
+  ctx.fillStyle = '#ecb900';
+  move(800, 700);
+  line(900, 700);
+  line(900, 800);
+  line(800, 800);
+  line(800, 700);
+  ctx.fill();
+  
+  ctx.beginPath();
+  ctx.fillStyle = '#9dec00';
+  move(800, 700);
+  line(850, 650);
+  line(950, 650);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.fillStyle = '#00c9ec';
+  move(800, 700);
+  line(950, 650);
+  line(900, 700);
+  ctx.fill();
+  
+  ctx.beginPath();
+  ctx.fillStyle = '#4f00ec';
+  move(900, 700);
+  line(950, 650);
+  line(950, 750);
+  line(900, 800);
+  
+  
+  ctx.fill();
+  
+  // Kanten
   ctx.beginPath();
   ctx.lineWidth = 3; // Dicke
   ctx.strokeStyle = '#ff0000'; // Farbe;
@@ -87,13 +123,46 @@ export const zeichne = ({ ctx /*, center, WIDTH, HEIGHT */ }) => {
   line(950, 650);
   line(850, 650);
   
+  ctx.stroke();
+  
+  // Quader
+  // =============================
+  // move(800, 700);
+  // line(900, 700);
+  
+  // Würfel
+  ctx.beginPath();
+  ctx.lineWidth = 3; // Dicke
+  ctx.strokeStyle = '#ff0000'; // Farbe;
+
+// hier Würfel Seitenlänge 150
+  move(50, 650);
+  line(300, 650);
+  line(300, 900);
+  line(45, 900);
+  line(50, 650);
+  line(150, 500);
+  line(380, 500);
+  
   
   ctx.stroke();
   
-  // ctx.fillStyle = '#ff0000';
-  // move(100, 100);
-  // line(200, 100);
-  // line(100, 200);
-  // ctx.fill();
-  // ctx.stroke();
+  
+  // Quader
+  ctx.beginPath();
+  ctx.lineWidth = 3; // Dicke
+  ctx.strokeStyle = '#00ff00'; // Farbe;
+
+// hier Quader
+  
+  ctx.stroke();
+  
+  // Quader
+  ctx.beginPath();
+  ctx.lineWidth = 3; // Dicke
+  ctx.strokeStyle = '#7300ff'; // Farbe;
+
+// hier Quader
+  
+  ctx.stroke();
 };
